@@ -18,7 +18,15 @@ You can choose to color your Events
 
 `https://barrycarlyon.github.io/twitchCalendar/?user_id=MYUSERID&color=990000`
 
+or
+
+`https://barrycarlyon.github.io/twitchCalendar/?user_id=MYUSERID&color=%23990000`
+
 Colors are HTML hex colors (with the preceeding #), find a [Quick Color Picker on Google](https://www.google.com/search?q=color+picker)
+
+## Alternatively
+
+Load [The UI](https://barrycarlyon.github.io/twitchCalendar/) and use the form.
 
 # Why
 

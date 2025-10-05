@@ -6,12 +6,33 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/williamtroup/Calendar.js@main/dist/calendar.js.min.css" />
     <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/williamtroup/Calendar.js@main/dist/calendar.min.js"></script>
     <script src="https://unpkg.com/ical.js/dist/ical.es5.min.cjs"></script>
+
+    <link rel="stylesheet" href="./style.css" />
 </head>
 <body>
 
     <div id="calendar"></div>
+    <div id="creator" style="display: none;"">
+        <form action="/twitchCalendar/" method="get">
+            <fieldset>
+                <div>
+                    <label for="user_id">UserID</label>
+                    <input type="text" id="user_id" name="user_id" />
+                    <div id="authenticate"></div>
+                    <input type="button" id="lookup" value="Convert Name to ID" style="display: none;" />
+                </div>
+                <div>
+                    <label for="color">Color</label>
+                    <input type="color" id="color" name="color" />
+                </div>
+                <div>
+                    <input type="submit" value="Show Me" />
+                </div>
+            </fieldset>
+        </form>
+    </div>
 
-    <script type="text/javascript" src="./calendar.min.js"></script>
+    <script type="text/javascript" src="./calendar.js"></script>
 
 </body>
 </html>

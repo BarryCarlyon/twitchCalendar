@@ -92,11 +92,72 @@ async function loadFeed(broadcaster_id, color) {
 
 let params = new URLSearchParams(window.location.search);
 let broadcaster_id = params.get('user_id');
-let color = `#${params.get('color') ?? '924afe'}`;
+let color = params.get('color') ?? '924afe';
+// magic patch
+color = decodeURIComponent(color);
+if (!color.startsWith('#')) {
+    color = `#${color}`;
+}
 
+let token = '';
 if (broadcaster_id) {
-    calendarInstance = new calendarJs( "calendar" );
     loadFeed(broadcaster_id, color);
 } else {
-    calendar.textContent = 'No Broadcaster ID Declared';
+    calendar.textContent = "No Broadcaster ID Declared add ?user_id=yourid";
+    creator.style.display = "block";
+
+    if (document.location.hash && document.location.hash != '') {
+        var parsedHash = new URLSearchParams(window.location.hash.slice(1));
+        token = parsedHash.get('access_token');
+
+        authenticate.style.display = 'none';
+        lookup.style.display = 'inline-block';
+
+        window.location = '#';
+    }
+
+    // build the dumb only if not in an iframe...
+    let url = new URL('https://id.twitch.tv/oauth2/authorize');
+    url.search = new URLSearchParams([
+        ['client_id', 'hozgh446gdilj5knsrsxxz8tahr3koz'],
+        ['redirect_uri', `${window.location.origin}/twitchCalendar/`],
+        ['response_type','token']
+    ]);
+    console.log(url.toString());
+    authenticate.addEventListener('click', (e) => {
+        e.preventDefault();
+
+        window.location = url;
+    });
+    lookup.addEventListener('click', async (e) => {
+        e.preventDefault();
+
+        let login = user_id.value;
+        let u = new URL('https://api.twitch.tv/helix/users');
+        u.search = new URLSearchParams([
+            [ 'login', login ]
+        ])
+        let req = await fetch(
+            u,
+            {
+                method: 'GET',
+                headers: {
+                    'Accept': 'application/json',
+                    'Client-ID': 'hozgh446gdilj5knsrsxxz8tahr3koz',
+                    'Authorization': `Bearer ${token}`
+                }
+            }
+        );
+        if (req.status != 200) {
+            // lol wut
+            return;
+        }
+        let {data} = await req.json();
+        if (data.length != 1) {
+            // rip
+            return;
+        }
+        let id = data[0].id;
+        user_id.value = id;
+    });
 }
