@@ -20,6 +20,10 @@ You can choose to color your Events
 
 Colors are HTML hex colors (with the preceeding #), find a [Quick Color Picker on Google](https://www.google.com/search?q=color+picker)
 
+# Why
+
+Inspired by this [Reddit Post](https://www.reddit.com/r/Twitch/comments/1nto3uw/is_there_a_way_to_embed_your_stream_schedule_on/)
+
 # Full iFrame
 
 ```html
@@ -27,5 +31,6 @@ Colors are HTML hex colors (with the preceeding #), find a [Quick Color Picker o
     src="https://barrycarlyon.github.io/twitchCalendar/?user_id=15185913&color=009900"
     width="100%"
     height="300px"
+    frameborder="0"
 ></iframe>
 ```
