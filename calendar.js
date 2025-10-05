@@ -2,11 +2,11 @@ let icalTemplate = 'https://api.twitch.tv/helix/schedule/icalendar?broadcaster_i
 
 let params = new URLSearchParams(window.location.search);
 let broadcaster_id = params.get('user_id');
-let color = params.get('color') ?? '924afe';
+let colorParam = params.get('color') ?? '924afe';
 // magic patch
-color = decodeURIComponent(color);
-if (!color.startsWith('#')) {
-    color = `#${color}`;
+colorParam = decodeURIComponent(colorParam);
+if (!colorParam.startsWith('#')) {
+    colorParam = `#${colorParam}`;
 }
 
 const calendarInstance = new calendarJs( "calendar", {
@@ -110,7 +110,7 @@ async function loadFeed(broadcaster_id, color) {
 
 let token = '';
 if (broadcaster_id) {
-    loadFeed(broadcaster_id, color);
+    loadFeed(broadcaster_id, colorParam);
 } else {
     calendar.style.display = 'none';
     creator.style.display = "block";
@@ -168,5 +168,32 @@ if (broadcaster_id) {
         }
         let id = data[0].id;
         user_id.value = id;
+    });
+
+    givecode.addEventListener('click', (e) => {
+        if (!user_id.value) {
+            return;
+        }
+
+        e.preventDefault();
+
+        let url = new URL('https://barrycarlyon.github.io/twitchCalendar/');
+        //?user_id=${user_id.value}&color=${color.value}&widget=${widget.value}')
+        url.search = new URLSearchParams([
+            [ 'user_id', user_id.value ],
+            [ 'color', color.value ],
+            [ 'widget', widget.value ]
+        ]);
+
+        output.textContent = '';
+        let inp = document.createElement('input');
+        inp.style.width = '100%';
+        inp.value = '<iframe' + "\n"
+        + ` src="${url.toString()}"` + "\n"
+        + ' width="100%"' + "\n"
+        + ' height="300px"' + "\n"
+        + ' frameborder="0"' + "\n"
+        + '></iframe>';
+        output.append(inp);
     });
 }

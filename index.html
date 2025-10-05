@@ -18,7 +18,7 @@
             <fieldset>
                 <div>
                     <label for="user_id">UserID</label>
-                    <input type="text" id="user_id" name="user_id" />
+                    <input type="text" id="user_id" name="user_id" required />
                     <div id="authenticate"></div>
                     <input type="button" id="lookup" value="Convert Name to ID" style="display: none;" />
                 </div>
@@ -35,7 +35,9 @@
                 </div>
                 <div>
                     <input type="submit" value="Show Me" />
+                    <input type="submit" id="givecode" value="Give Code" />
                 </div>
+                <div id="output"></div>
             </fieldset>
         </form>
     </div>
