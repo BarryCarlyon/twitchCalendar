@@ -190,7 +190,7 @@ if (broadcaster_id) {
         inp.style.width = '100%';
         inp.value = '<iframe' + "\n"
         + ` src="${url.toString()}"` + "\n"
-        + ' width="100%"' + "\n"
+        + ` width="${widget.value == 'true' ? '300px' : '100%'}"` + "\n"
         + ' height="300px"' + "\n"
         + ' frameborder="0"' + "\n"
         + '></iframe>';
