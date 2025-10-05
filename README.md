@@ -8,7 +8,7 @@ Normally on a website you would use an iFrame.
 
 You will need your User ID (or the user ID of the user you want to display)
 
-So `15185913` instead of `barrycarlyon`, you can easily find your ID via [Twitch Auth Example](https://barrycarlyon.github.io/twitch_misc/authentication/implicit_auth/)
+So `15185913` instead of `barrycarlyon`, you can easily find your ID via [Twitch Auth Example](https://barrycarlyon.github.io/twitch_misc/authentication/implicit_auth/) or use the [Quick Form](https://barrycarlyon.github.io/twitchCalendar/)
 
 Construct your URL as follows:
 
@@ -26,7 +26,7 @@ Colors are HTML hex colors (with the preceeding #), find a [Quick Color Picker o
 
 ## Alternatively
 
-Load [The UI](https://barrycarlyon.github.io/twitchCalendar/) and use the form.
+Load [The UI](https://barrycarlyon.github.io/twitchCalendar/) and use the form to setup. You can Twitch oAuth on the form to easily do name to ID.
 
 # Why
 
