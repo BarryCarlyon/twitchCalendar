@@ -95,5 +95,8 @@ let broadcaster_id = params.get('user_id');
 let color = `#${params.get('color') ?? '924afe'}`;
 
 if (broadcaster_id) {
+    calendarInstance = new calendarJs( "calendar" );
     loadFeed(broadcaster_id, color);
+} else {
+    calendar.textContent = 'No Broadcaster ID Declared';
 }
