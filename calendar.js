@@ -1,6 +1,20 @@
 let icalTemplate = 'https://api.twitch.tv/helix/schedule/icalendar?broadcaster_id={id}';
 
-const calendarInstance = new calendarJs( "calendar" );
+let params = new URLSearchParams(window.location.search);
+let broadcaster_id = params.get('user_id');
+let color = params.get('color') ?? '924afe';
+// magic patch
+color = decodeURIComponent(color);
+if (!color.startsWith('#')) {
+    color = `#${color}`;
+}
+
+const calendarInstance = new calendarJs( "calendar", {
+    manualEditingEnabled: false,
+    fullScreenModeEnabled: true,
+    openInFullScreenMode: true,
+    isWidget: (params.get('widget') == 'true' ?? false)
+} );
 
 async function loadFeed(broadcaster_id, color) {
     // fetch the iCal feed from twitch
@@ -88,22 +102,17 @@ async function loadFeed(broadcaster_id, color) {
     });
 
     calendarInstance.addEvents(events);
-}
 
-let params = new URLSearchParams(window.location.search);
-let broadcaster_id = params.get('user_id');
-let color = params.get('color') ?? '924afe';
-// magic patch
-color = decodeURIComponent(color);
-if (!color.startsWith('#')) {
-    color = `#${color}`;
+    calendarInstance.setOptions({
+        organizerName: name,
+    });
 }
 
 let token = '';
 if (broadcaster_id) {
     loadFeed(broadcaster_id, color);
 } else {
-    calendar.textContent = "No Broadcaster ID Declared add ?user_id=yourid";
+    calendar.style.display = 'none';
     creator.style.display = "block";
 
     if (document.location.hash && document.location.hash != '') {

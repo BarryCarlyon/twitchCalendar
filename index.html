@@ -13,6 +13,7 @@
 
     <div id="calendar"></div>
     <div id="creator" style="display: none;"">
+        <p>No Broadcaster ID Declared add ?user_id=yourid or use this form:</p>
         <form action="/twitchCalendar/" method="get">
             <fieldset>
                 <div>
@@ -26,6 +27,13 @@
                     <input type="color" id="color" name="color" />
                 </div>
                 <div>
+                    <label for="widget">Widget</label>
+                    <select id="widget" name="widget">
+                        <option value="false">No</option>
+                        <option value="true">Yes</option>
+                    </select>
+                </div>
+                <div>
                     <input type="submit" value="Show Me" />
                 </div>
             </fieldset>
@@ -33,6 +41,5 @@
     </div>
 
     <script type="text/javascript" src="./calendar.min.js"></script>
-
 </body>
 </html>
