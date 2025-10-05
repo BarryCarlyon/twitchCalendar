@@ -92,7 +92,7 @@ async function loadFeed(broadcaster_id, color) {
 
 let params = new URLSearchParams(window.location.search);
 let broadcaster_id = params.get('user_id');
-let color = params.get('color') ?? '#924afe';
+let color = `#${params.get('color') ?? '924afe'}`;
 
 if (broadcaster_id) {
     loadFeed(broadcaster_id, color);
